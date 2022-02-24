@@ -402,7 +402,7 @@ struct grpc_tcp {
   grpc_core::MemoryAllocator::Reservation self_reservation;
 
   grpc_core::TracedBuffer* tb_head; /* List of traced buffers */
-  gpr_mu tb_mu;        /* Lock for access to list of traced buffers */
+  gpr_mu tb_mu; /* Lock for access to list of traced buffers */
 
   /* grpc_endpoint_write takes an argument which if non-null means that the
    * transport layer wants the TCP layer to collect timestamps for this write.
