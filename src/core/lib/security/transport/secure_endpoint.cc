@@ -174,17 +174,16 @@ static void secure_endpoint_ref(secure_endpoint* ep) { gpr_ref(&ep->ref); }
 static void benign_reclaimer_locked(void* arg, grpc_error_handle error) {
   secure_endpoint* ep = static_cast<secure_endpoint*>(arg);
   if (GRPC_TRACE_FLAG_ENABLED(grpc_resource_quota_trace)) {
-    gpr_log(GPR_INFO,
-            "secure endpoint: benign reclamation to free memory");
+    gpr_log(GPR_INFO, "secure endpoint: benign reclamation to free memory");
   }
-  if(error == GRPC_ERROR_NONE) {
+  if (error == GRPC_ERROR_NONE) {
     grpc_slice_unref_internal(ep->read_staging_buffer);
     grpc_slice_unref_internal(ep->write_staging_buffer);
     ep->read_staging_buffer = grpc_empty_slice();
     ep->write_staging_buffer = grpc_empty_slice();
   }
   ep->has_posted_reclaimer = false;
-  if(error != GRPC_ERROR_CANCELLED) {
+  if (error != GRPC_ERROR_CANCELLED) {
     ep->active_reclamation.Finish();
   }
   SECURE_ENDPOINT_UNREF(ep, "benign_reclaimer");
@@ -197,9 +196,12 @@ static void post_reclaimer(secure_endpoint* ep) {
         grpc_core::ReclamationPass::kBenign,
         [ep](absl::optional<grpc_core::ReclamationSweep> sweep) {
           if (sweep.has_value()) {
-              GRPC_CLOSURE_INIT(&ep->benign_reclaimer_locked, benign_reclaimer_locked, ep, grpc_schedule_on_exec_ctx);
-              ep->active_reclamation = std::move(*sweep);
-              grpc_core::ExecCtx::Run(DEBUG_LOCATION, &ep->benign_reclaimer_locked, GRPC_ERROR_NONE);
+            GRPC_CLOSURE_INIT(&ep->benign_reclaimer_locked,
+                              benign_reclaimer_locked, ep,
+                              grpc_schedule_on_exec_ctx);
+            ep->active_reclamation = std::move(*sweep);
+            grpc_core::ExecCtx::Run(
+                DEBUG_LOCATION, &ep->benign_reclaimer_locked, GRPC_ERROR_NONE);
           } else {
             SECURE_ENDPOINT_UNREF(ep, "benign_reclaimer");
           }
