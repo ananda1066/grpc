@@ -360,7 +360,8 @@ class BasicMemoryQuota final
 
   // Reclaimer queues.
   ReclaimerQueue reclaimers_[kNumReclamationPasses];
-  // List of all allocators sorted into 2 buckets, small (<100 KB free bytes) and large (>500 KB free bytes).
+  // List of all allocators sorted into 2 buckets, small (<100 KB free bytes)
+  // and large (>500 KB free bytes).
   std::array<AllocatorBucket, 2> allocators_;
   // The reclaimer activity consumes reclaimers whenever we are in overcommit to
   // try and get back under memory limits.
