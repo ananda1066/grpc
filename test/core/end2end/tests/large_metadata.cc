@@ -18,9 +18,9 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-#include <grpc/byte_buffer.h>
 #include <grpc/grpc.h>
 #include <grpc/impl/propagation_bits.h>
 #include <grpc/slice.h>
