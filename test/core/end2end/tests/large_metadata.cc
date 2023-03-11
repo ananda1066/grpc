@@ -64,9 +64,9 @@ static grpc_status_code send_metadata(CoreTestFixture* f,
   grpc_call_error error;
   int was_cancelled = 2;
   gpr_timespec deadline = grpc_timeout_seconds_to_deadline(5);
-  c = grpc_channel_create_call(f->client(), nullptr, GRPC_PROPAGATE_DEFAULTS, f->cq(),
-                               grpc_slice_from_static_string("/foo"), nullptr,
-                               deadline, nullptr);
+  c = grpc_channel_create_call(f->client(), nullptr, GRPC_PROPAGATE_DEFAULTS,
+                               f->cq(), grpc_slice_from_static_string("/foo"),
+                               nullptr, deadline, nullptr);
   GPR_ASSERT(c);
 
   // Add metadata of size `metadata_size`.
@@ -103,13 +103,13 @@ static grpc_status_code send_metadata(CoreTestFixture* f,
   op->flags = 0;
   op->reserved = nullptr;
   op++;
-  error = grpc_call_start_batch(c, ops, static_cast<size_t>(op - ops), grpc_core::CqVerifier::tag(1),
-                                nullptr);
+  error = grpc_call_start_batch(c, ops, static_cast<size_t>(op - ops),
+                                grpc_core::CqVerifier::tag(1), nullptr);
   GPR_ASSERT(GRPC_CALL_OK == error);
 
-  error =
-      grpc_server_request_call(f->server(), &s, &call_details,
-                               &request_metadata_recv, f->cq(), f->cq(), grpc_core::CqVerifier::tag(101));
+  error = grpc_server_request_call(f->server(), &s, &call_details,
+                                   &request_metadata_recv, f->cq(), f->cq(),
+                                   grpc_core::CqVerifier::tag(101));
   GPR_ASSERT(GRPC_CALL_OK == error);
 
   cqv.Expect(grpc_core::CqVerifier::tag(101), true);
@@ -137,8 +137,8 @@ static grpc_status_code send_metadata(CoreTestFixture* f,
   op->flags = 0;
   op->reserved = nullptr;
   op++;
-  error = grpc_call_start_batch(s, ops, static_cast<size_t>(op - ops), grpc_core::CqVerifier::tag(102),
-                                nullptr);
+  error = grpc_call_start_batch(s, ops, static_cast<size_t>(op - ops),
+                                grpc_core::CqVerifier::tag(102), nullptr);
   GPR_ASSERT(GRPC_CALL_OK == error);
   cqv.Expect(grpc_core::CqVerifier::tag(102), true);
   cqv.Expect(grpc_core::CqVerifier::tag(1), true);
