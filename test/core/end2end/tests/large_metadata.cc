@@ -69,10 +69,21 @@ static grpc_status_code send_metadata(CoreTestFixture* f,
                                nullptr, deadline, nullptr);
   GPR_ASSERT(c);
 
-  // Add metadata of size `metadata_size`.
-  meta.key = grpc_slice_from_static_string("key");
-  meta.value = grpc_slice_malloc(metadata_size);
-  memset(GRPC_SLICE_START_PTR(meta.value), 'a', metadata_size);
+  int PerformRequests(size_t metadata_size, int count) {
+    int num_requests_accepted = 0;
+    for (int i = 0; i < count; ++i) {
+      auto status = PerformOneRequest(metadata_size);
+      if (status.status() == GRPC_STATUS_RESOURCE_EXHAUSTED) {
+        EXPECT_THAT(status.message(),
+                    ::testing::StartsWith("received metadata size exceeds"));
+      } else {
+        num_requests_accepted++;
+        EXPECT_EQ(status.status(), GRPC_STATUS_OK);
+        EXPECT_EQ(status.message(), "xyz");
+      }
+    }
+    return num_requests_accepted;
+  }
 
   grpc_metadata_array_init(&initial_metadata_recv);
   grpc_metadata_array_init(&trailing_metadata_recv);
