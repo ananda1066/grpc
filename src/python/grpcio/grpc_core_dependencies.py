@@ -460,11 +460,7 @@ CORE_SOURCE_FILES = [
     'src/core/lib/address_utils/parse_address.cc',
     'src/core/lib/address_utils/sockaddr_utils.cc',
     'src/core/lib/backoff/backoff.cc',
-<<<<<<< HEAD
-=======
     'src/core/lib/backoff/random_early_detection.cc',
-    'src/core/lib/channel/call_tracer.cc',
->>>>>>> 19d06a78ec (Add random early rejection for metadata (#32600))
     'src/core/lib/channel/channel_args.cc',
     'src/core/lib/channel/channel_args_preconditioning.cc',
     'src/core/lib/channel/channel_stack.cc',
