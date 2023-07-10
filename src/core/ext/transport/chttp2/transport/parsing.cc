@@ -49,6 +49,7 @@
 #include "src/core/ext/transport/chttp2/transport/internal.h"
 #include "src/core/lib/channel/call_tracer.h"
 #include "src/core/lib/channel/channelz.h"
+#include "src/core/lib/channel/context.h"
 #include "src/core/lib/debug/trace.h"
 #include "src/core/lib/gprpp/ref_counted_ptr.h"
 #include "src/core/lib/gprpp/status_helper.h"
