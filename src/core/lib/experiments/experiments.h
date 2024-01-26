@@ -92,7 +92,6 @@ inline bool IsPromiseBasedServerCallEnabled() { return false; }
 #define GRPC_EXPERIMENT_IS_INCLUDED_REGISTERED_METHOD_LOOKUP_IN_TRANSPORT
 inline bool IsRegisteredMethodLookupInTransportEnabled() { return true; }
 inline bool IsPromiseBasedInprocTransportEnabled() { return false; }
-inline bool IsRegisteredMethodsMapEnabled() { return false; }
 inline bool IsRfcMaxConcurrentStreamsEnabled() { return false; }
 #define GRPC_EXPERIMENT_IS_INCLUDED_ROUND_ROBIN_DELEGATE_TO_PICK_FIRST
 inline bool IsRoundRobinDelegateToPickFirstEnabled() { return true; }
@@ -154,7 +153,6 @@ inline bool IsPromiseBasedServerCallEnabled() { return false; }
 #define GRPC_EXPERIMENT_IS_INCLUDED_REGISTERED_METHOD_LOOKUP_IN_TRANSPORT
 inline bool IsRegisteredMethodLookupInTransportEnabled() { return true; }
 inline bool IsPromiseBasedInprocTransportEnabled() { return false; }
-inline bool IsRegisteredMethodsMapEnabled() { return false; }
 inline bool IsRfcMaxConcurrentStreamsEnabled() { return false; }
 #define GRPC_EXPERIMENT_IS_INCLUDED_ROUND_ROBIN_DELEGATE_TO_PICK_FIRST
 inline bool IsRoundRobinDelegateToPickFirstEnabled() { return true; }
@@ -216,7 +214,6 @@ inline bool IsPromiseBasedServerCallEnabled() { return false; }
 #define GRPC_EXPERIMENT_IS_INCLUDED_REGISTERED_METHOD_LOOKUP_IN_TRANSPORT
 inline bool IsRegisteredMethodLookupInTransportEnabled() { return true; }
 inline bool IsPromiseBasedInprocTransportEnabled() { return false; }
-inline bool IsRegisteredMethodsMapEnabled() { return false; }
 inline bool IsRfcMaxConcurrentStreamsEnabled() { return false; }
 #define GRPC_EXPERIMENT_IS_INCLUDED_ROUND_ROBIN_DELEGATE_TO_PICK_FIRST
 inline bool IsRoundRobinDelegateToPickFirstEnabled() { return true; }
@@ -264,7 +261,6 @@ enum ExperimentIds {
   kExperimentIdPromiseBasedServerCall,
   kExperimentIdRegisteredMethodLookupInTransport,
   kExperimentIdPromiseBasedInprocTransport,
-  kExperimentIdRegisteredMethodsMap,
   kExperimentIdRfcMaxConcurrentStreams,
   kExperimentIdRoundRobinDelegateToPickFirst,
   kExperimentIdRstpit,
@@ -364,10 +360,6 @@ inline bool IsRegisteredMethodLookupInTransportEnabled() {
 #define GRPC_EXPERIMENT_IS_INCLUDED_PROMISE_BASED_INPROC_TRANSPORT
 inline bool IsPromiseBasedInprocTransportEnabled() {
   return IsExperimentEnabled(kExperimentIdPromiseBasedInprocTransport);
-}
-#define GRPC_EXPERIMENT_IS_INCLUDED_REGISTERED_METHODS_MAP
-inline bool IsRegisteredMethodsMapEnabled() {
-  return IsExperimentEnabled(kExperimentIdRegisteredMethodsMap);
 }
 #define GRPC_EXPERIMENT_IS_INCLUDED_RFC_MAX_CONCURRENT_STREAMS
 inline bool IsRfcMaxConcurrentStreamsEnabled() {
