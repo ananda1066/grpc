@@ -23,7 +23,7 @@
 
 #include <memory>
 
-#include "include/grpc/event_engine/event_engine.h"
+#include <grpc/event_engine/event_engine.h>
 #include <grpc/grpc.h>
 #include <grpc/slice.h>
 #include <grpc/support/port_platform.h>
@@ -43,7 +43,7 @@ CreateSecureEndpoint(
     std::unique_ptr<grpc_event_engine::experimental::EventEngine::Endpoint>
         to_wrap,
     grpc_event_engine::experimental::Slice* leftover_slices,
-    const grpc_core::ChannelArgs& channel_args, size_t leftover_nslices);
+    const ChannelArgs& channel_args, size_t leftover_nslices);
 
 }  // namespace grpc_core
 

@@ -48,12 +48,12 @@
 #include "absl/log/log.h"
 #include "absl/status/status.h"
 
-#include "include/grpc/event_engine/event_engine.h"
-#include "include/grpc/event_engine/slice.h"
-#include "include/grpc/event_engine/slice_buffer.h"
-#include "include/grpc/slice.h"
-#include "include/grpc/support/alloc.h"
-#include "include/grpc/support/log.h"
+#include <grpc/event_engine/event_engine.h>
+#include <grpc/event_engine/slice.h>
+#include <grpc/event_engine/slice_buffer.h>
+#include <grpc/slice.h>
+#include <grpc/support/alloc.h>
+#include <grpc/support/log.h>
 #include <grpc/support/port_platform.h>
 
 #include "src/core/lib/debug/trace_impl.h"
@@ -580,7 +580,7 @@ CreateSecureEndpoint(
     std::unique_ptr<grpc_event_engine::experimental::EventEngine::Endpoint>
         to_wrap,
     grpc_event_engine::experimental::Slice* leftover_slices,
-    const grpc_core::ChannelArgs& channel_args, size_t leftover_nslices) {
+    const ChannelArgs& channel_args, size_t leftover_nslices) {
   return std::make_unique<SecureEndpoint>(protector, zero_copy_protector,
                                           std::move(to_wrap), leftover_slices,
                                           channel_args, leftover_nslices);
