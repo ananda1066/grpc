@@ -74,7 +74,7 @@ using ::grpc_event_engine::experimental::SliceBuffer;
 class InterceptEndpoint : public EventEngine::Endpoint,
                           EndpointSupportsFdExtension {
  public:
-  InterceptEndpoint(std::unique_ptr<EventEngine::Endpoint> wrapped_ep)
+  explicit InterceptEndpoint(std::unique_ptr<EventEngine::Endpoint> wrapped_ep)
       : wrapped_ep_(std::move(wrapped_ep)) {}
   bool Read(absl::AnyInvocable<void(absl::Status)> on_read, SliceBuffer* buffer,
             const ReadArgs* args) override {

@@ -68,7 +68,7 @@ void CreateSockets(SOCKET sv[2]) {
         SOCKET_ERROR);
 
   cli_sock = WSASocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, 0,
-                       ::grpc_get_default_wsa_socket_flags());
+                       grpc_get_default_wsa_socket_flags());
   CHECK(cli_sock != INVALID_SOCKET);
 
   CHECK(WSAConnect(cli_sock, (grpc_sockaddr*)&addr, addr_len, NULL, NULL, NULL,
